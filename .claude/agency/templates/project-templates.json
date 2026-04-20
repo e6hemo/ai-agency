@@ -1,0 +1,262 @@
+{
+  "templates": {
+    "website-build": {
+      "name": "بناء موقع ويب كامل",
+      "emoji": "🌐",
+      "description": "بناء موقع ويب احترافي من الصفر — من التصميم إلى النشر",
+      "estimatedTime": "2-4 ساعات",
+      "phases": [
+        {
+          "name": "البحث والتخطيط",
+          "agent": "project-manager",
+          "tasks": ["تحليل المتطلبات", "تحديد الهيكل والصفحات", "اختيار التقنيات"],
+          "acceptanceCriteria": "وثيقة متطلبات شاملة مع مخطط صفحات"
+        },
+        {
+          "name": "التصميم",
+          "agent": "ui-ux-designer",
+          "tasks": ["تصميم نظام الألوان", "بناء Design System", "تصميم الصفحة الرئيسية"],
+          "acceptanceCriteria": "ملفات HTML/CSS جاهزة مع Dark Mode وResponsive",
+          "dependsOn": [0]
+        },
+        {
+          "name": "التطوير",
+          "agent": "full-stack-developer",
+          "tasks": ["بناء الـ Backend/API", "تكامل الواجهة", "إضافة التفاعلات"],
+          "acceptanceCriteria": "تطبيق يعمل بدون أخطاء مع كل الصفحات",
+          "dependsOn": [1]
+        },
+        {
+          "name": "تحسين SEO",
+          "agent": "seo-specialist",
+          "tasks": ["إضافة Meta Tags", "Schema Markup", "تحسين الأداء"],
+          "acceptanceCriteria": "تقرير SEO إيجابي مع Schema JSON-LD",
+          "dependsOn": [2]
+        },
+        {
+          "name": "مراجعة الكود",
+          "agent": "code-reviewer",
+          "tasks": ["فحص الأمان", "فحص الأداء", "فحص إمكانية الوصول"],
+          "acceptanceCriteria": "تقرير مراجعة مع حالة: ✅ مقبول",
+          "dependsOn": [2]
+        }
+      ]
+    },
+
+    "marketing-campaign": {
+      "name": "إطلاق حملة تسويقية",
+      "emoji": "📢",
+      "description": "حملة تسويقية متكاملة عبر جميع القنوات الرقمية",
+      "estimatedTime": "3-5 ساعات",
+      "phases": [
+        {
+          "name": "الاستراتيجية",
+          "agent": "marketing-strategist",
+          "tasks": ["تحليل السوق والمنافسين", "بناء Buyer Personas", "تحديد القنوات والميزانية"],
+          "acceptanceCriteria": "خطة تسويقية شاملة مع KPIs وجدول زمني"
+        },
+        {
+          "name": "المحتوى",
+          "agent": "content-writer",
+          "tasks": ["كتابة محتوى الحملة", "مقالات SEO", "نصوص صفحات الهبوط"],
+          "acceptanceCriteria": "محتوى أصلي 100% مع SEO محسّن",
+          "dependsOn": [0]
+        },
+        {
+          "name": "الإعلانات",
+          "agent": "copywriter-ar",
+          "tasks": ["نصوص Google Ads", "نصوص Meta Ads", "نصوص TikTok"],
+          "acceptanceCriteria": "5 variants لكل إعلان مع CTAs واضحة",
+          "dependsOn": [0]
+        },
+        {
+          "name": "السوشيال ميديا",
+          "agent": "social-media-manager",
+          "tasks": ["تقويم محتوى شهري", "منشورات كل منصة", "أفكار Reels"],
+          "acceptanceCriteria": "تقويم كامل مع هاشتاقات وتوقيتات",
+          "dependsOn": [1]
+        },
+        {
+          "name": "الإيميل",
+          "agent": "email-marketer",
+          "tasks": ["Welcome Sequence", "Nurture Campaign", "Sales Sequence"],
+          "acceptanceCriteria": "سلاسل بريدية مع Subject Lines و A/B variants",
+          "dependsOn": [1]
+        }
+      ]
+    },
+
+    "mobile-app": {
+      "name": "بناء تطبيق جوال",
+      "emoji": "📱",
+      "description": "تطبيق جوال Cross-platform (React Native/Expo أو Flutter)",
+      "estimatedTime": "4-8 ساعات",
+      "phases": [
+        {
+          "name": "التخطيط",
+          "agent": "project-manager",
+          "tasks": ["تحليل المتطلبات", "تحديد المنصة", "رسم User Flow"],
+          "acceptanceCriteria": "وثيقة متطلبات مع User Flow واضح"
+        },
+        {
+          "name": "تصميم الواجهة",
+          "agent": "ui-ux-designer",
+          "tasks": ["تصميم الشاشات", "نظام التصميم", "Prototype"],
+          "acceptanceCriteria": "تصاميم Mobile-first مع كل الحالات",
+          "dependsOn": [0]
+        },
+        {
+          "name": "التطوير",
+          "agent": "mobile-developer",
+          "tasks": ["بناء الهيكل", "تكامل APIs", "Navigation"],
+          "acceptanceCriteria": "تطبيق يعمل على المحاكي بدون أخطاء",
+          "dependsOn": [1]
+        },
+        {
+          "name": "المراجعة",
+          "agent": "code-reviewer",
+          "tasks": ["فحص الأمان", "فحص الأداء", "فحص UX"],
+          "acceptanceCriteria": "تقرير مراجعة إيجابي",
+          "dependsOn": [2]
+        }
+      ]
+    },
+
+    "brand-identity": {
+      "name": "بناء هوية بصرية",
+      "emoji": "🎨",
+      "description": "هوية بصرية متكاملة من الشعار إلى دليل الاستخدام",
+      "estimatedTime": "2-3 ساعات",
+      "phases": [
+        {
+          "name": "الاستراتيجية",
+          "agent": "marketing-strategist",
+          "tasks": ["تحليل السوق", "تحديد الجمهور", "تحديد القيم والشخصية"],
+          "acceptanceCriteria": "Brand Brief واضح مع Brand Personality"
+        },
+        {
+          "name": "التصميم",
+          "agent": "brand-designer",
+          "tasks": ["تصميم الشعار SVG", "نظام الألوان", "نظام الخطوط"],
+          "acceptanceCriteria": "شعار SVG + ألوان CSS + دليل هوية",
+          "dependsOn": [0]
+        },
+        {
+          "name": "المحتوى",
+          "agent": "content-writer",
+          "tasks": ["Tagline", "About Us", "Value Propositions"],
+          "acceptanceCriteria": "نصوص العلامة التجارية بالعربية والإنجليزية",
+          "dependsOn": [0]
+        },
+        {
+          "name": "الإعلانات",
+          "agent": "copywriter-ar",
+          "tasks": ["شعارات إعلانية", "نصوص وسائط", "Bio templates"],
+          "acceptanceCriteria": "5+ شعارات و Bio لكل منصة",
+          "dependsOn": [1, 2]
+        }
+      ]
+    },
+
+    "content-strategy": {
+      "name": "خطة محتوى شهرية",
+      "emoji": "📝",
+      "description": "استراتيجية محتوى متكاملة لشهر كامل عبر جميع القنوات",
+      "estimatedTime": "2-3 ساعات",
+      "phases": [
+        {
+          "name": "البحث",
+          "agent": "seo-specialist",
+          "tasks": ["بحث الكلمات المفتاحية", "تحليل المنافسين", "Content Gap"],
+          "acceptanceCriteria": "قائمة كلمات مفتاحية مع أحجام وصعوبات"
+        },
+        {
+          "name": "الاستراتيجية",
+          "agent": "marketing-strategist",
+          "tasks": ["تحديد المحاور", "Topic Clusters", "تقويم النشر"],
+          "acceptanceCriteria": "خطة محتوى شهرية مع محاور واضحة",
+          "dependsOn": [0]
+        },
+        {
+          "name": "الكتابة",
+          "agent": "content-writer",
+          "tasks": ["4 مقالات SEO", "محتوى صفحات", "Email Newsletter"],
+          "acceptanceCriteria": "مقالات جاهزة للنشر مع Meta data",
+          "dependsOn": [1]
+        },
+        {
+          "name": "السوشيال",
+          "agent": "social-media-manager",
+          "tasks": ["30 منشور", "8 أفكار Reels", "Hashtag sets"],
+          "acceptanceCriteria": "تقويم كامل مع توقيتات",
+          "dependsOn": [1]
+        },
+        {
+          "name": "الفيديو",
+          "agent": "video-scripter",
+          "tasks": ["4 سكربتات YouTube", "8 سكربتات Reels"],
+          "acceptanceCriteria": "سكربتات مع Shot Lists وتوجيهات مونتاج",
+          "dependsOn": [1]
+        }
+      ]
+    },
+
+    "competitor-analysis": {
+      "name": "تحليل منافسين شامل",
+      "emoji": "🔍",
+      "description": "دراسة عميقة للمنافسين مع توصيات استراتيجية",
+      "estimatedTime": "1-2 ساعة",
+      "phases": [
+        {
+          "name": "جمع البيانات",
+          "agent": "marketing-strategist",
+          "tasks": ["تحديد المنافسين", "تحليل SWOT", "تحليل القنوات"],
+          "acceptanceCriteria": "تقرير مقارنة مع جداول واضحة"
+        },
+        {
+          "name": "تحليل SEO",
+          "agent": "seo-specialist",
+          "tasks": ["Keyword Gap", "Backlink Analysis", "Content Comparison"],
+          "acceptanceCriteria": "تقرير SEO مقارن مع فرص",
+          "dependsOn": [0]
+        },
+        {
+          "name": "تحليل البيانات",
+          "agent": "data-analyst",
+          "tasks": ["تحليل الأرقام", "بناء Dashboard", "التوصيات"],
+          "acceptanceCriteria": "تقرير بأرقام ورسوم بيانية وتوصيات",
+          "dependsOn": [0, 1]
+        }
+      ]
+    },
+
+    "customer-support-setup": {
+      "name": "إعداد نظام دعم عملاء",
+      "emoji": "💖",
+      "description": "بناء نظام دعم عملاء متكامل من الصفر",
+      "estimatedTime": "2-3 ساعات",
+      "phases": [
+        {
+          "name": "التخطيط",
+          "agent": "customer-support",
+          "tasks": ["SLA تعريف", "Escalation Matrix", "Priority Levels"],
+          "acceptanceCriteria": "وثيقة SLA كاملة مع عمليات واضحة"
+        },
+        {
+          "name": "قاعدة المعرفة",
+          "agent": "customer-support",
+          "tasks": ["20 مقال FAQ", "3 أدلة إرشادية", "Troubleshooting Guide"],
+          "acceptanceCriteria": "Knowledge Base منظمة ومصنفة",
+          "dependsOn": [0]
+        },
+        {
+          "name": "الردود الجاهزة",
+          "agent": "customer-support",
+          "tasks": ["Canned Responses", "Chatbot Flow", "Email Templates"],
+          "acceptanceCriteria": "30+ رد جاهز مع متغيرات ديناميكية",
+          "dependsOn": [0]
+        }
+      ]
+    }
+  }
+}

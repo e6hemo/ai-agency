@@ -1,0 +1,118 @@
+{
+  "version": "2.0",
+  "description": "توزيع النماذج على وكلاء OpenClaude مع إعدادات المسارات والحدود",
+
+  "agents": {
+    "agent-zero": {
+      "provider": "google",
+      "model": "gemini-1.5-pro",
+      "fallback": "deepseek-chat",
+      "temperature": 0.3,
+      "maxTokens": 8192,
+      "reason": "المنسق الرئيسي — يحتاج أفضل نموذج"
+    },
+    "project-manager": {
+      "provider": "google",
+      "model": "gemini-1.5-pro",
+      "fallback": "deepseek-chat",
+      "temperature": 0.3,
+      "maxTokens": 8192,
+      "reason": "يحتاج تفكيراً استراتيجياً عميقاً"
+    },
+    "full-stack-developer": {
+      "provider": "deepseek",
+      "model": "deepseek-coder",
+      "fallback": "llama3-groq-70b-8192-tool-use",
+      "temperature": 0.1,
+      "maxTokens": 8192,
+      "reason": "متخصص في الكود بدقة عالية"
+    },
+    "qa-engineer": {
+      "provider": "groq",
+      "model": "llama-3.1-70b-versatile",
+      "fallback": "deepseek-coder",
+      "temperature": 0.1,
+      "maxTokens": 4096,
+      "reason": "سريع ودقيق في اكتشاف الأخطاء"
+    },
+    "marketing-strategist": {
+      "provider": "groq",
+      "model": "llama-3.1-70b-versatile",
+      "fallback": "gemini-1.5-flash",
+      "temperature": 0.7,
+      "maxTokens": 4096,
+      "reason": "إبداعي وسريع للمحتوى التسويقي"
+    },
+    "ui-ux-designer": {
+      "provider": "google",
+      "model": "gemini-1.5-flash",
+      "fallback": "llama-3.1-70b-versatile",
+      "temperature": 0.6,
+      "maxTokens": 4096,
+      "reason": "يفهم الأنماط البصرية جيداً"
+    },
+    "seo-specialist": {
+      "provider": "google",
+      "model": "gemini-1.5-flash",
+      "fallback": "llama-3.1-70b-versatile",
+      "temperature": 0.4,
+      "maxTokens": 4096,
+      "reason": "مهمة متوسطة لا تحتاج نموذجاً ثقيلاً"
+    },
+    "content-writer": {
+      "provider": "groq",
+      "model": "llama-3.1-70b-versatile",
+      "fallback": "gemini-1.5-flash",
+      "temperature": 0.8,
+      "maxTokens": 4096,
+      "reason": "الكتابة الإبداعية تحتاج درجة حرارة أعلى"
+    },
+    "data-analyst": {
+      "provider": "google",
+      "model": "gemini-1.5-pro",
+      "fallback": "deepseek-chat",
+      "temperature": 0.2,
+      "maxTokens": 4096,
+      "reason": "التحليل يحتاج دقة عالية"
+    },
+    "quality-gates": {
+      "provider": "google",
+      "model": "gemini-1.5-flash",
+      "fallback": "llama-3.1-70b-versatile",
+      "temperature": 0.1,
+      "maxTokens": 2048,
+      "reason": "فحص سريع ودقيق — Flash يكفي"
+    }
+  },
+
+  "rateLimits": {
+    "gemini-1.5-pro":                    { "rpm": 2,  "retryAfterMs": 30000 },
+    "gemini-1.5-flash":                  { "rpm": 15, "retryAfterMs": 4000  },
+    "deepseek-coder":                    { "rpm": 60, "retryAfterMs": 1000  },
+    "deepseek-chat":                     { "rpm": 60, "retryAfterMs": 1000  },
+    "llama-3.1-70b-versatile":           { "rpm": 30, "retryAfterMs": 2000  },
+    "llama-3.1-8b-instant":              { "rpm": 30, "retryAfterMs": 2000  },
+    "llama3-groq-70b-8192-tool-use":     { "rpm": 30, "retryAfterMs": 2000  }
+  },
+
+  "pipelines": {
+    "full-product": {
+      "description": "مسار المنتج الكامل: من التخطيط للتسليم",
+      "steps": ["project-manager", "full-stack-developer", "ui-ux-designer", "marketing-strategist", "qa-engineer"]
+    },
+    "tech-only": {
+      "description": "مسار تقني فقط",
+      "steps": ["project-manager", "full-stack-developer", "qa-engineer"]
+    },
+    "marketing-only": {
+      "description": "مسار تسويقي فقط",
+      "steps": ["project-manager", "marketing-strategist", "seo-specialist", "content-writer"]
+    }
+  },
+
+  "defaults": {
+    "maxRetries": 3,
+    "qualityThreshold": 75,
+    "costPriority": "balanced"
+  }
+}

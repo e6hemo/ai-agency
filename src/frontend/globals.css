@@ -1,0 +1,14 @@
+:root {
+  --bg-primary: #000000;
+  --bg-secondary: #111111;
+  --accent: #3b82f6;
+  --text-primary: #ffffff;
+  --font-sans: 'Inter', sans-serif;
+  --font-mono: 'Fira Code', monospace;
+}
+
+@keyframes pulse {
+  0% { opacity: 1; }
+  50% { opacity: 0.5; }
+  100% { opacity: 1; }
+}

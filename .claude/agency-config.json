@@ -1,0 +1,110 @@
+{
+  "env": {
+    "CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS": "1"
+  },
+  "agency": {
+    "name": "OpenClaude AI Agency",
+    "version": "2.0.0",
+    "language": "ar",
+    "defaultModel": "inherit",
+    "teamMode": true,
+    "teammateMode": "in-process",
+    "maxTeamSize": 6,
+    "requirePlanApproval": true,
+    "departments": {
+      "marketing": {
+        "emoji": "🟠",
+        "label": "قسم التسويق",
+        "lead": "marketing-strategist",
+        "members": ["content-writer", "social-media-manager", "email-marketer", "copywriter-ar"]
+      },
+      "development": {
+        "emoji": "🔵",
+        "label": "قسم البرمجة",
+        "lead": "full-stack-developer",
+        "members": ["code-reviewer", "mobile-developer"]
+      },
+      "design": {
+        "emoji": "🟢",
+        "label": "قسم التصميم",
+        "lead": "ui-ux-designer",
+        "members": ["brand-designer"]
+      },
+      "media": {
+        "emoji": "🟣",
+        "label": "قسم الميديا",
+        "lead": "video-scripter",
+        "members": []
+      },
+      "seo": {
+        "emoji": "🟡",
+        "label": "قسم SEO",
+        "lead": "seo-specialist",
+        "members": []
+      },
+      "data": {
+        "emoji": "📊",
+        "label": "قسم البيانات",
+        "lead": "data-analyst",
+        "members": []
+      },
+      "support": {
+        "emoji": "💬",
+        "label": "قسم الدعم",
+        "lead": "customer-support",
+        "members": []
+      },
+      "management": {
+        "emoji": "⚪",
+        "label": "قسم الإدارة",
+        "lead": "project-manager",
+        "members": []
+      },
+      "research": {
+        "emoji": "🔬",
+        "label": "قسم الأبحاث",
+        "lead": "chief-researcher",
+        "members": []
+      }
+    },
+    "pipelines": {
+      "launch-campaign": {
+        "description": "إطلاق حملة تسويقية كاملة",
+        "steps": ["marketing-strategist", "content-writer", "ui-ux-designer", "social-media-manager", "email-marketer"]
+      },
+      "build-website": {
+        "description": "بناء موقع ويب كامل",
+        "steps": ["ui-ux-designer", "full-stack-developer", "seo-specialist", "code-reviewer"]
+      },
+      "build-mobile-app": {
+        "description": "بناء تطبيق جوال",
+        "steps": ["ui-ux-designer", "mobile-developer", "code-reviewer"]
+      },
+      "create-brand": {
+        "description": "بناء هوية بصرية كاملة",
+        "steps": ["marketing-strategist", "brand-designer", "content-writer", "copywriter-ar"]
+      },
+      "content-calendar": {
+        "description": "تقويم محتوى شهري",
+        "steps": ["marketing-strategist", "content-writer", "social-media-manager", "seo-specialist"]
+      },
+      "seo-audit": {
+        "description": "تحليل SEO شامل",
+        "steps": ["seo-specialist", "data-analyst", "content-writer"]
+      },
+      "competitor-analysis": {
+        "description": "تحليل منافسين شامل",
+        "steps": ["marketing-strategist", "data-analyst", "seo-specialist"]
+      },
+      "daily-brief": {
+        "description": "ملخص يومي ذكي — يعرض المشاريع النشطة وأداء الوكلاء والمهام المعلقة",
+        "steps": ["project-manager", "data-analyst"]
+      },
+      "weekly-review": {
+        "description": "مراجعة أسبوعية ذاتية — يفحص الأخطاء المتكررة ويقترح تحسينات",
+        "steps": ["data-analyst", "project-manager", "chief-researcher"]
+      }
+    }
+  }
+}
+

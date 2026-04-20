@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OpenClaude AI Agency — لوحة التحكم</title>
+  <meta name="description" content="وكالة OpenClaude للذكاء الاصطناعي — منصة وكلاء احترافية بأسلوب ChatGPT" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- ═══════ Sidebar (Collapsible) ═══════ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-top">
+      <button class="sidebar-toggle" id="sidebar-toggle" onclick="toggleSidebar()">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+      </button>
+      <button class="new-chat-btn" onclick="showPage('overview')">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
+        <span class="sidebar-label">محادثة جديدة</span>
+      </button>
+    </div>
+
+    <nav class="sidebar-nav">
+      <button class="nav-item active" id="nav-overview" onclick="showPage('overview')">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg></span><span class="sidebar-label">الرئيسية</span>
+      </button>
+
+      <div id="departments-nav" style="display:none;"></div> <!-- Hidden to prevent app.js from breaking -->
+
+      <div class="nav-section-label sidebar-label" style="margin-top:16px;">الوكالة</div>
+      <button class="nav-item" id="nav-agents" onclick="showPage('agents')">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></span><span class="sidebar-label">الوكلاء</span>
+      </button>
+      <button class="nav-item" id="nav-tasks" onclick="showPage('tasks')">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M14 2H6a2 2 0 0 0-2 2v16c0 1.1.9 2 2 2h12a2 2 0 0 0 2-2V8l-6-6z"/><path d="M14 3v5h5M16 13H8M16 17H8M10 9H8"/></svg></span><span class="sidebar-label">المهام</span>
+      </button>
+      <button class="nav-item" id="nav-memory" onclick="showPage('memory')">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7v10c0 2 1 3 3 3h10c2 0 3-1 3-3V7c0-2-1-3-3-3H7c-2 0-3 1-3 3z"/></svg></span><span class="sidebar-label">الذاكرة</span>
+      </button>
+
+      <div class="nav-section-label sidebar-label" style="margin-top:16px;">النظام</div>
+      <button class="nav-item" id="nav-cost" onclick="showPage('cost')">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><line x1="12" y1="1" x2="12" y2="23"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/></svg></span><span class="sidebar-label">التكاليف</span>
+      </button>
+      <button class="nav-item" id="nav-daily-log" onclick="showPage('daily-log')">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 19a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h5l2 3h9a2 2 0 0 1 2 2z"/></svg></span><span class="sidebar-label">السجلات</span>
+      </button>
+      <button class="nav-item" id="nav-settings" onclick="showPage('settings')">
+        <span class="nav-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg></span><span class="sidebar-label">الإعدادات</span>
+      </button>
+    </nav>
+
+    <div class="sidebar-footer">
+      <div class="sidebar-footer-inner">
+        <div class="status-dot active"></div>
+        <span class="sidebar-label">OpenClaude v1.0</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Sidebar collapse overlay (mobile) -->
+  <div class="sidebar-overlay hidden" id="sidebar-overlay" onclick="toggleSidebar()"></div>
+
+  <!-- ═══════ Main Content ═══════ -->
+  <main class="main" id="main">
+
+    <!-- ══ PAGE: Overview (ChatGPT Landing) ══ -->
+    <div class="page-content" id="page-overview">
+      <div class="landing-container">
+        <div class="landing-hero">
+          <div class="landing-logo">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <h1 class="landing-title">OpenClaude AI Agency</h1>
+          <p class="landing-subtitle">مرحباً بك في وكالتك الذكية — اختر قسماً أو ابدأ محادثة مع أي وكيل</p>
+        </div>
+
+        <div class="landing-cards" id="landing-cards">
+          <!-- Department cards injected by JS -->
+        </div>
+
+        <div class="landing-stats" id="landing-stats">
+          <!-- Quick stats injected by JS -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PAGE: Agents ══ -->
+    <div class="page-content hidden" id="page-agents">
+      <div id="react-agents-root"></div>
+    </div>
+
+    <!-- ══ PAGE: Tasks ══ -->
+    <div class="page-content hidden" id="page-tasks">
+      <div style="color:var(--text-tertiary); padding:20px;">صفحة المهام — قريباً</div>
+    </div>
+
+    <!-- ══ PAGE: Memory ══ -->
+    <div class="page-content hidden" id="page-memory">
+      <div id="react-memory-root"></div>
+    </div>
+
+    <!-- ══ PAGE: Cost ══ -->
+    <div class="page-content hidden" id="page-cost">
+      <div id="react-cost-root"></div>
+    </div>
+
+
+    <!-- ══ PAGE: Department (Chat + Tabs) ══ -->
+    <div class="page-content hidden" id="page-department">
+      <!-- Department Header with Tabs -->
+      <div class="dept-topbar">
+        <div class="dept-topbar-info">
+          <span class="dept-emoji" id="dept-emoji"><svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><circle cx="12" cy="12" r="10"/></svg></span>
+          <span class="dept-name" id="dept-name">القسم</span>
+          <span class="dept-badge" id="dept-badge">5 وكلاء</span>
+        </div>
+        <div class="dept-tabs">
+          <button class="dept-tab active" data-tab="chat" onclick="switchDeptTab('chat')">المحادثة</button>
+          <button class="dept-tab" data-tab="log" onclick="switchDeptTab('log')">السجل</button>
+          <button class="dept-tab" data-tab="experiments" onclick="switchDeptTab('experiments')">التجارب</button>
+          <button class="dept-tab" data-tab="skills" onclick="switchDeptTab('skills')">المهارات</button>
+        </div>
+      </div>
+
+      <!-- Tab: Chat -->
+      <div class="dept-tab-content" id="tab-chat">
+        <div class="chat-messages" id="chat-messages">
+          <div class="chat-empty">
+            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" class="chat-empty-icon"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            <p>اختر وكيلاً لبدء المحادثة</p>
+          </div>
+        </div>
+        <div class="chat-input-wrapper">
+          <div class="agent-selector">
+            <select id="chat-agent-select" class="agent-select" onchange="selectAgentFromDropdown()">
+              <option value="">اختر وكيلاً...</option>
+            </select>
+            <div class="model-selector">
+              <select id="chat-model-select" class="model-select">
+                <option value="qwen2.5-coder:7b">👨‍💻 Qwen 2.5 Coder 7B (Pro/Code)</option>
+                <option value="deepseek-r1:8b">🧠 DeepSeek R1 8B (Thinking)</option>
+                <option value="qwen2.5:3b">🐉 Qwen 2.5 3B (Fast/Arabic)</option>
+                <option value="llama3.2:3b">⚡ Llama 3.2 3B (Local)</option>
+                <option value="google/gemma-3-27b-it:free">🟢 Gemma 3 27B</option>
+                <option value="qwen/qwen-2.5-72b-instruct:free">🟢 Qwen 2.5 72B</option>
+                <option value="anthropic/claude-3.5-sonnet:beta">Claude 3.5</option>
+                <option value="openai/gpt-4o">GPT-4o</option>
+              </select>
+            </div>
+          </div>
+          <div class="chat-input-bar">
+            <textarea id="chat-input" placeholder="اكتب مهمتك هنا..." rows="1"></textarea>
+            <button class="send-btn" id="send-btn" onclick="sendMessage()">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab: Activity Log -->
+      <div class="dept-tab-content hidden" id="tab-log">
+        <div class="log-container" id="dept-log-container">
+          <div class="log-empty">لا توجد سجلات لهذا القسم بعد.</div>
+        </div>
+      </div>
+
+      <!-- Tab: Experiments -->
+      <div class="dept-tab-content hidden" id="tab-experiments">
+        <div class="experiments-container" id="dept-experiments-container">
+          <div class="log-empty">لا توجد تجارب لهذا القسم بعد.</div>
+        </div>
+      </div>
+
+      <!-- Tab: Skills -->
+      <div class="dept-tab-content hidden" id="tab-skills">
+        <div class="skills-container" id="dept-skills-container">
+          <div class="log-empty">لا توجد مهارات لهذا القسم بعد.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PAGE: Pipeline Execution ══ -->
+    <div class="page-content hidden" id="page-pipelines">
+      <div class="tool-page">
+        <div class="tool-header">
+          <h2>تشغيل خط الأنابيب (Pipeline)</h2>
+          <p>شغّل سلسلة وكلاء متخصصين بشكل تلقائي واشهد كل خطوة تنجز لحظة بلحظة.</p>
+        </div>
+        <div class="tool-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>اختر Pipeline</label>
+              <select class="form-select" id="pipeline-select" onchange="previewPipelineSteps()">
+                <option value="">-- اختر --</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label>الموديل</label>
+              <select id="pipelines-model-select" class="form-input">
+                <option value="qwen2.5-coder:7b">Qwen 2.5 Coder 7B (Pro/Code)</option>
+                <option value="deepseek-r1:8b">🧠 DeepSeek R1 8B (Thinking)</option>
+                <option value="qwen2.5:3b">🐉 Qwen 2.5 3B (Fast/Arabic)</option>
+                <option value="llama3.2:3b">⚡ Llama 3.2 3B (Local)</option>
+                <option value="google/gemma-3-27b-it:free">🟢 Gemma 3 27B FREE</option>
+                <option value="qwen/qwen-2.5-72b-instruct:free">🟢 Qwen 2.5 72B FREE</option>
+                <option value="anthropic/claude-3.5-sonnet:beta">Claude 3.5 Sonnet</option>
+                <option value="openai/gpt-4o">GPT-4o</option>
+              </select>
+            </div>
+          </div>
+          <div class="form-group" id="pipeline-steps-preview" style="display:none">
+            <label>🔢 خطوات التنفيذ</label>
+            <div id="pipeline-steps-list" class="steps-chips"></div>
+          </div>
+          <div class="form-group">
+            <label>طلبك / وصف المشروع</label>
+            <textarea class="form-textarea" id="pipeline-message" rows="3" placeholder="مثال: أريد إطلاق حملة تسويقية لتطبيق محافظ صحي..."></textarea>
+          </div>
+          <button class="btn-primary" id="pipeline-run-btn" onclick="runPipeline()">تشغيل الأنبوب</button>
+        </div>
+        <div id="pipeline-progress" style="display:none;" class="pipeline-progress-area">
+          <h3 id="pipeline-progress-title">جارٍ التنفيذ الآن...</h3>
+          <div id="pipeline-step-tracker"></div>
+          <div id="pipeline-results"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PAGE: Daily Log ══ -->
+    <div class="page-content hidden" id="page-daily-log">
+      <div class="tool-page">
+        <div class="tool-header">
+          <h2>السجل اليومي</h2>
+          <p>كل الأحداث والقرارات التي حصلت اليوم — مُسجلة تلقائياً.</p>
+        </div>
+        <div id="daily-log-content" class="daily-log-content">
+          <div class="log-empty">جارِي تحميل السجل...</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PAGE: Projects ══ -->
+    <div class="page-content hidden" id="page-projects">
+      <div class="tool-page">
+        <div class="tool-header">
+          <h2>المشاريع</h2>
+          <button class="btn-primary btn-sm" onclick="showNewProjectModal()">+ مشروع جديد</button>
+        </div>
+        <div class="projects-grid" id="projects-grid">
+          <div class="log-empty">📁 لا توجد مشاريع بعد</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PAGE: Training ══ -->
+    <div class="page-content hidden" id="page-train">
+      <div class="tool-page">
+        <div class="tool-header">
+          <h2>تدريب الوكلاء</h2>
+          <p>علّم أي وكيل من الفريق باستخدام ملفاتك أو روابط الويب.</p>
+        </div>
+        <div class="tool-form">
+          <div class="form-group">
+            <label>اختر الوكيل</label>
+            <select class="form-select" id="train-agent"><option value="">-- اختر --</option></select>
+          </div>
+          <div class="form-group">
+            <label>المصدر (رابط URL أو مسار ملف)</label>
+            <input type="text" class="form-input" id="train-source" placeholder="https://example.com/guide" />
+          </div>
+          <div class="form-group">
+            <label>ملاحظات إضافية</label>
+            <textarea class="form-textarea" id="train-notes" rows="3" placeholder="سياق إضافي..."></textarea>
+          </div>
+          <div class="command-preview" id="train-preview"><code id="train-cmd">اختر وكيلاً ومصدراً...</code></div>
+          <button class="btn-primary" onclick="copyTrainCommand()">نسخ الأمر</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PAGE: Settings ══ -->
+    <div class="page-content hidden" id="page-settings">
+      <div class="tool-page">
+        <div class="tool-header">
+          <h2>إعدادات الوكالة</h2>
+          <p>أضف مفاتيح API لربط الوكلاء بنماذج الذكاء الاصطناعي.</p>
+        </div>
+        <div class="tool-form">
+          <div class="settings-card">
+            <div class="settings-card-header">
+              <span>OpenRouter API Key</span>
+              <span id="api-key-status">جاري الفحص...</span>
+            </div>
+            <p class="settings-hint">مطلوب لتشغيل المحادثات الحقيقية مع الوكلاء.</p>
+          </div>
+          <div class="form-group">
+            <label>مفتاح OpenRouter</label>
+            <input type="password" class="form-input" id="api-key-input" placeholder="sk-or-v1-..." style="font-family:monospace;direction:ltr;" />
+          </div>
+          <button class="btn-primary" onclick="saveApiKeyFromForm()">حفظ المفتاح</button>
+        </div>
+      </div>
+      </div>
+    </div>
+
+    <!-- ══ PAGE: Strategic Radar ══ -->
+    <div class="page-content hidden" id="page-radar">
+      <div class="tool-page full-width">
+        <div class="tool-header">
+          <h2>الرادار الاستراتيجي</h2>
+          <p>مراقبة حية لجميع المشاريع والعلاقات الاستراتيجية مع تنبيهات مبكرة للمخاطر.</p>
+        </div>
+        <div class="radar-container" id="radar-container">
+          <div class="radar-panel">
+            <h3>تحذيرات نشطة</h3>
+            <div id="radar-warnings" class="radar-warnings-list"></div>
+          </div>
+          <div class="radar-grid-wrapper">
+            <div class="radar-grid">
+              <div class="radar-scan"></div>
+              <div id="radar-blips"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PAGE: Virtual Board ══ -->
+    <div class="page-content hidden" id="page-board">
+      <div class="tool-page full-width">
+        <div class="tool-header">
+          <h2>مجلس الإدارة الافتراضي</h2>
+          <p>استشر أعظم العقول في التاريخ للحصول على وجهات نظر متعددة لقراراتك المعقدة.</p>
+        </div>
+        <div class="board-container">
+          <div class="board-grid" id="board-grid">
+            <!-- Advisors Will Be Injected Here -->
+          </div>
+          <div class="board-chat">
+            <div class="board-messages" id="board-messages">
+              <div class="log-empty">اختر مستشاراً لبدء الجلسة...</div>
+            </div>
+            <div class="chat-input-wrapper" style="max-width:100%; padding:0;">
+              <div class="chat-input-bar">
+                <textarea id="board-input" placeholder="اطرح قضيتك على المجلس..." rows="1"></textarea>
+                <button class="send-btn" onclick="sendBoardMessage()">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PAGE: Strategic Vault ══ -->
+    <div class="page-content hidden" id="page-vault">
+      <div class="tool-page full-width">
+        <div class="tool-header">
+          <h2>خزينة المعرفة</h2>
+          <p>عقلك الثاني. يتم هنا حفظ الأفكار، الدروس المستفادة، والنماذج الذهنية بشكل مترابط.</p>
+        </div>
+        <div class="vault-toolbar">
+          <input type="text" class="form-input search-input" placeholder="البحث في الخزينة..." style="max-width: 300px; display: inline-block;" />
+          <button class="btn-primary btn-sm">+ فكرة جديدة</button>
+        </div>
+        <br>
+        <div class="vault-grid masonry" id="vault-grid">
+            <!-- Knowledge Cards -->
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PAGE: Personal University ══ -->
+    <div class="page-content hidden" id="page-university">
+      <div class="tool-page">
+        <div class="tool-header">
+          <h2>الجامعة الشخصية</h2>
+          <p>تحيّل على منحنى التعلم. مسارات نمو مخصصة لتطوير مهاراتك بشكل منهجي.</p>
+        </div>
+        <div class="university-container">
+          <div class="univ-stats">
+            <div class="stat-card">
+              <span class="stat-icon"></span>
+              <div class="stat-info"><span class="stat-val">12</span><span class="stat-lbl">يوم متتالي</span></div>
+            </div>
+            <div class="stat-card">
+              <span class="stat-icon"></span>
+              <div class="stat-info"><span class="stat-val">4</span><span class="stat-lbl">مناهج نشطة</span></div>
+            </div>
+            <button class="btn-primary btn-sm" style="margin-right:auto">+ منهج جديد</button>
+          </div>
+          <div class="univ-tracks" id="univ-tracks">
+            <!-- Growth Tracks -->
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="page-content hidden" id="page-identity">
+      <div class="tool-page">
+        <div class="tool-header">
+          <h2>مختبر الهوية والدستور</h2>
+          <p>قم بصياغة قيمك الجوهرية وتدريب استنساخك الرقمي للتفكير والكتابة بأسلوبك.</p>
+        </div>
+        <div class="identity-container">
+          <div class="identity-section">
+            <h3>القيم الجوهرية</h3>
+            <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">ما هي المبادئ التي لا تتنازل عنها؟</p>
+            <textarea id="identity-values" class="form-textarea" rows="4" placeholder="مثال: الصدق، الإتقان، الاستقلالية، التعلم المستمر..."></textarea>
+          </div>
+          <div class="identity-section" style="margin-top:20px;">
+            <h3>الرؤية</h3>
+            <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">أين تريد أن تكون بعد 5 سنوات؟</p>
+            <textarea id="identity-vision" class="form-textarea" rows="4" placeholder="مثال: بناء وكالة ذكاء اصطناعي تخدم 1000 عميل عربي..."></textarea>
+          </div>
+          <div class="identity-section" style="margin-top:20px;">
+            <h3>المهمة</h3>
+            <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">ما هي مهمتك اليومية التي تقربك من رؤيتك؟</p>
+            <textarea id="identity-mission" class="form-textarea" rows="4" placeholder="مثال: تقديم حلول تسويقية ذكية تعتمد على الذكاء الاصطناعي..."></textarea>
+          </div>
+          <div class="identity-section" style="margin-top:20px;">
+            <h3>أسلوب التواصل (Tone Config)</h3>
+            <p style="font-size:13px; color:var(--text-muted); margin-bottom:12px;">هكذا سيتحدث وكلاؤك نيابة عنك.</p>
+            <textarea id="identity-principles" class="form-textarea" rows="4" placeholder="مثال: استخدم جملاً قصيرة، كن مباشراً، لا تستخدم إيموجي بكثرة..."></textarea>
+          </div>
+          <button class="btn-primary" style="margin-top:20px; width:100%;" onclick="saveIdentity()">حفظ الدستور الشخصي</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ══ PAGE: Prompt Lab ══ -->
+    <div class="page-content hidden" id="page-prompt-lab">
+      <div class="tool-page">
+        <div class="tool-header">
+          <h2>محسّن البرومبتات (Prompt Engineer)</h2>
+          <p>أداة ذكية ببرمجة مسبقة + مساعدة ذكاء اصطناعي لصياغة أقوى الأوامر لوكلائك.</p>
+        </div>
+        
+        <div class="wizard-container" style="display:flex; gap:20px; flex-wrap:wrap;">
+          <!-- Wizard Settings -->
+          <div style="flex:1; min-width:300px; background:var(--surface-light); padding:20px; border-radius:12px; border:1px solid var(--border-color);">
+            <div class="form-group">
+              <label>1. اختر الوكيل المستهدف</label>
+              <select id="prompt-agent-type" class="form-input" onchange="updatePromptQuestions()">
+                <option value="marketing">التسويق والمبيعات</option>
+                <option value="programming">البرمجة وتطوير البرمجيات</option>
+                <option value="design">التصميم وتجربة المستخدم</option>
+                <option value="seo">السيو وتحسين محركات البحث</option>
+                <option value="management">الإدارة والتنسيق (Orchestrator)</option>
+              </select>
+            </div>
+            
+            <div id="prompt-questions-container" style="margin-top:20px; border-top:1px solid rgba(255,255,255,0.1); padding-top:20px;">
+              <!-- Dynamic questions injected here via JS -->
+            </div>
+            
+            <button class="btn-primary" style="margin-top:20px; width:100%;" onclick="generateEnhancedPrompt()">توليد وبرمجة برومبت احترافي</button>
+          </div>
+          
+          <!-- Wizard Output -->
+          <div style="flex:1.5; min-width:400px; display:flex; flex-direction:column; gap:15px;">
+            <div style="background:var(--surface-light); padding:20px; border-radius:12px; border:1px solid var(--border-color); flex:1; display:flex; flex-direction:column;">
+              <h3 style="margin-bottom:10px;">البرومبت المحسّن (النتيجة)</h3>
+              <textarea id="prompt-result" class="form-textarea" style="flex:1; min-height:200px; font-family:monospace; font-size:14px; line-height:1.6;" placeholder="سيظهر البرومبت الجاهز هنا..."></textarea>
+              
+              <div style="display:flex; gap:10px; margin-top:15px;">
+                <button class="btn-ghost" onclick="copyEnhancedPrompt()" style="flex:1;">نسخ ولصق يدوياً</button>
+                <button class="btn-primary" onclick="sendPromptToOrchestrator()" style="flex:2; background:var(--accent); border:none;">إرسال إلى المنسق لتقسيم المهام تلقائياً</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Modal -->
+  <div class="modal-overlay hidden" id="modal-overlay" onclick="hideModal()"></div>
+  <div class="modal hidden" id="modal-new-project">
+    <div class="modal-header"><h2>مشروع جديد</h2><button onclick="hideModal()">✕</button></div>
+    <div class="modal-body">
+      <div class="form-group"><label>اسم المشروع</label><input type="text" class="form-input" id="proj-name" placeholder="my-project" /></div>
+      <div class="form-group"><label>وصف المشروع</label><textarea class="form-textarea" id="proj-desc" rows="3" placeholder="اشرح ما تريد..."></textarea></div>
+      <div class="command-preview"><code id="modal-cmd">/agency init [name] "description"</code></div>
+    </div>
+    <div class="modal-footer"><button class="btn-ghost" onclick="hideModal()">إلغاء</button><button class="btn-primary" onclick="copyInitCommand()">نسخ</button></div>
+  </div>
+
+  <script src="reports-patch.js"></script>
+  <script src="app.js"></script>
+  <script src="ui-pages.js"></script>
+</body>
+</html>

@@ -1,0 +1,93 @@
+{
+  "teamName": "team-tg-project-1776631993321-mo68tfr7",
+  "projectName": "tg-project-1776631993321",
+  "leadAgent": "project-manager",
+  "teammates": [
+    {
+      "name": "project-manager",
+      "agentType": "project-manager",
+      "department": "management",
+      "assignedTasks": [
+        "task_1776631993603_eeud",
+        "task_1776631993603_lxxa"
+      ],
+      "status": "idle",
+      "joinedAt": "2026-04-19T20:53:13.603Z"
+    },
+    {
+      "name": "marketing-strategist",
+      "agentType": "marketing-strategist",
+      "department": "marketing",
+      "assignedTasks": [
+        "task_1776631993603_i9nf"
+      ],
+      "status": "idle",
+      "joinedAt": "2026-04-19T20:53:13.603Z"
+    },
+    {
+      "name": "data-analyst",
+      "agentType": "data-analyst",
+      "department": "data",
+      "assignedTasks": [
+        "task_1776631993603_xvmx"
+      ],
+      "status": "idle",
+      "joinedAt": "2026-04-19T20:53:13.603Z"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "task_1776631993603_eeud",
+      "title": "التخطيط والتحليل",
+      "description": "تحليل المتطلبات ووضع خطة العمل: 📋 تحليل الطلب\n\n📋 تحليل الطلب: تسويق واستراتيجية (متوسط)\n📂 الأقسام: management, marketing\n🎯 الإجراءات: 1 إجراء رئيسي\n\n⏱ الوقت المقدر: 30 دقيقة\n📝 عدد الأقسام: 2\n🤖 عدد الوكلاء: 2\n📊 التعقيد: moderate\n\nالأقسام المطلوبة:\n  • management\n  • marketing\n\nالإجراءات:\n  1. حملة تسويقية لمنتج جديد",
+      "assignedTo": "project-manager",
+      "status": "pending",
+      "priority": "critical",
+      "department": "management",
+      "dependencies": [],
+      "createdAt": "2026-04-19T20:53:13.603Z"
+    },
+    {
+      "id": "task_1776631993603_i9nf",
+      "title": "🟠 قسم التسويق: تنفيذ المهام",
+      "description": "المطلوب من قسم قسم التسويق: تنفيذ الجزء المتعلق بالمتطلبات التالية:\n📋 تحليل الطلب\n\n📋 تحليل الطلب: تسويق واستراتيجية (متوسط)\n📂 الأقسام: management, marketing\n🎯 الإجراءات: 1 إجراء رئيسي\n\n⏱ الوقت المقدر: 30 دقيقة\n📝 عدد الأقسام: 2\n🤖 عدد الوكلاء: 2\n📊 التعقيد: moderate\n\nالأقسام المطلوبة:\n  • management\n  • marketing\n\nالإجراءات:\n  1. حملة تسويقية لمنتج جديد",
+      "assignedTo": "marketing-strategist",
+      "status": "blocked",
+      "priority": "high",
+      "department": "marketing",
+      "dependencies": [
+        "task_1776631993603_eeud"
+      ],
+      "createdAt": "2026-04-19T20:53:13.603Z"
+    },
+    {
+      "id": "task_1776631993603_xvmx",
+      "title": "📊 قسم البيانات: تنفيذ المهام",
+      "description": "المطلوب من قسم قسم البيانات: تنفيذ الجزء المتعلق بالمتطلبات التالية:\n📋 تحليل الطلب\n\n📋 تحليل الطلب: تسويق واستراتيجية (متوسط)\n📂 الأقسام: management, marketing\n🎯 الإجراءات: 1 إجراء رئيسي\n\n⏱ الوقت المقدر: 30 دقيقة\n📝 عدد الأقسام: 2\n🤖 عدد الوكلاء: 2\n📊 التعقيد: moderate\n\nالأقسام المطلوبة:\n  • management\n  • marketing\n\nالإجراءات:\n  1. حملة تسويقية لمنتج جديد",
+      "assignedTo": "data-analyst",
+      "status": "blocked",
+      "priority": "high",
+      "department": "data",
+      "dependencies": [
+        "task_1776631993603_eeud"
+      ],
+      "createdAt": "2026-04-19T20:53:13.603Z"
+    },
+    {
+      "id": "task_1776631993603_lxxa",
+      "title": "المراجعة والدمج النهائي",
+      "description": "مراجعة جميع المخرجات، دمجها، وتقديم التقرير النهائي للمستخدم.",
+      "assignedTo": "project-manager",
+      "status": "blocked",
+      "priority": "high",
+      "department": "management",
+      "dependencies": [
+        "task_1776631993603_i9nf",
+        "task_1776631993603_xvmx"
+      ],
+      "createdAt": "2026-04-19T20:53:13.603Z"
+    }
+  ],
+  "createdAt": "2026-04-19T20:53:13.603Z",
+  "status": "active"
+}

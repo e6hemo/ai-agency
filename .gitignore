@@ -1,0 +1,43 @@
+# =========================================================
+# OpenClaude Agency — .gitignore
+# =========================================================
+
+# ─── Dependencies ─────────────────────────
+node_modules/
+dist/
+build/
+*.tsbuildinfo
+
+# ─── Environment (مهم جداً) ───────────────
+.env
+.env.*
+!.env.example
+
+# ─── OpenClaude Files ─────────────────────
+.openclaude-profile.json
+reports/
+outputs/
+state/
+
+# ─── Database ─────────────────────────────
+.claude/agency/mempalace.db
+.claude/agency/mempalace.db-shm
+.claude/agency/mempalace.db-wal
+
+# ─── Runtime Files ────────────────────────
+.claude/agency/locks/
+.claude/agency/daily-logs/
+.claude/agency/projects/
+.claude/agency/experiments.json
+.claude/memory/
+
+# ─── OS ───────────────────────────────────
+.DS_Store
+.DS_Store?
+Thumbs.db
+
+# ─── IDE ──────────────────────────────────
+.vscode/settings.json
+.idea/
+*.swp
+*.swo
